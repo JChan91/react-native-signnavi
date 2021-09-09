@@ -8,29 +8,10 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
+import Input from './components/Input';
+import SignIn from './components/SignIn';
 
 const App = () => {
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [pwVisible, setPwVisible] = useState(false);
-
-  const onChangeEmail = text => {
-    setUserEmail(text);
-  };
-
-  const onChangePassword = text => {
-    setUserPassword(text);
-  };
-
-  const onPressVisible = () => {
-    setPwVisible(!pwVisible);
-  };
-
-  const onPressBtn = () => {
-    console.log('BUTTON');
-  };
-
   return (
     <View style={styles.mainContainer}>
       <View style={styles.logoView}>
@@ -43,44 +24,11 @@ const App = () => {
       </View>
 
       <View style={styles.inputView}>
-        <TextInput
-          style={styles.userInput}
-          placeholder="USER EMAIL"
-          placeholderTextColor="#fff"
-          value={userEmail}
-          returnKeyType="next"
-          autoCorrect={false}
-          onChangeText={onChangeEmail}
-        />
-        <TextInput
-          style={styles.userInput}
-          placeholder="USER PASSWORD"
-          placeholderTextColor="#fff"
-          secureTextEntry={pwVisible ? true : false}
-          value={userPassword}
-          onChangeText={onChangePassword}
-        />
-
-        <View style={styles.visibleIcon}>
-          <TouchableOpacity>
-            <Text onPress={onPressVisible}>
-              <Icon
-                name={pwVisible ? 'eye-with-line' : 'eye'}
-                size={40}
-                color="#fff"
-              />
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Input />
       </View>
 
       <View style={styles.btnView}>
-        <TouchableOpacity style={styles.btn} onPress={onPressBtn}>
-          <Text style={styles.btnText}>Sign in</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress={onPressBtn}>
-          <Text style={styles.btnText}>Sign up</Text>
-        </TouchableOpacity>
+        <SignIn />
       </View>
     </View>
   );
@@ -102,36 +50,11 @@ const styles = StyleSheet.create({
   },
 
   inputView: {
-    flex: 2,
-  },
-
-  userInput: {
-    color: '#fff',
-    margin: 10,
-    padding: 5,
-    borderBottomWidth: 1,
-    borderColor: '#fff',
-  },
-
-  visibleIcon: {
-    flexDirection: 'row',
+    flex: 1,
   },
 
   btnView: {
     flex: 1,
-  },
-
-  btn: {
-    height: '20%',
-    backgroundColor: '#30A9DE',
-    margin: 8,
-    borderRadius: 10,
-  },
-
-  btnText: {
-    color: '#fff',
-    fontSize: 20,
-    textAlign: 'center',
   },
 });
 
