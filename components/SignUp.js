@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 
-const SignUp = () => {
+const SignUp = ({handleUsers, navigation}) => {
   const [inputEmail, setInputEmail] = useState('');
   const [inputPassword, setInputPassword] = useState('');
   const [inputConfirmPw, setInputConfirmPw] = useState('');
@@ -27,6 +27,11 @@ const SignUp = () => {
     setInputConfirmPw(text);
   };
 
+  const onSubmit = () => {
+    handleUsers(inputEmail, inputPassword);
+    navigation.goBack();
+  };
+
   const checkValid = () => {
     if (inputPassword !== inputConfirmPw) {
       Alert.alert('Wrong', 'Wrong Password', [
@@ -39,11 +44,8 @@ const SignUp = () => {
       ]);
     }
 
-    if (inputPassword === inputConfirmPw) {
-      console.log('Correct');
-      if (!valid) {
-        setValid(!valid);
-      }
+    if (inputPassword === inputConfirmPw && !valid) {
+      setValid(!valid);
     }
   };
 
@@ -64,6 +66,7 @@ const SignUp = () => {
           placeholder="Email"
           placeholderTextColor="#fff"
           onChangeText={onChangeEmail}
+          value={inputEmail}
         />
         <TextInput
           style={styles.input}
@@ -85,7 +88,10 @@ const SignUp = () => {
       </View>
 
       <View>
-        <TouchableOpacity style={styles.btn} disabled={valid ? false : true}>
+        <TouchableOpacity
+          style={styles.btn}
+          disabled={valid ? false : true}
+          onPress={onSubmit}>
           <Text style={styles.btnText}>Submit</Text>
         </TouchableOpacity>
       </View>
